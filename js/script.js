@@ -9,4 +9,17 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  displayBooks();
+}
+
+function displayBooks() {
+  const tbody = document.querySelector('tbody');
+  tbody.replaceChildren();
+
+  myLibrary.forEach(book => {
+    const row = tbody.insertRow(-1);
+    for (key in book) {
+      row.insertCell().textContent = book[key];
+    }
+  });
 }
