@@ -36,6 +36,14 @@ function displayBooks() {
         row.insertCell().textContent = book[key];
       }
     }
+
+    const actionButtons = row.insertCell();
+    const statusBtn = document.createElement('button');
+    const deleteBtn = document.createElement('button');
+
+    statusBtn.textContent = updateButtonText(book);
+    deleteBtn.textContent = 'Delete';
+    actionButtons.append(statusBtn, deleteBtn);
   });
 }
 
@@ -55,4 +63,8 @@ function submitBookForm(e) {
   e.preventDefault();
   bookForm.reset();
   dialog.close();
+}
+
+function updateButtonText(book) {
+  return book.read === 'Unread' ? 'Mark as Read' : 'Mark as Unread';
 }
