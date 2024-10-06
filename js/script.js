@@ -15,6 +15,10 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.changeReadStatus = function () {
+  this.read = this.read === 'Unread' ? 'Read' : 'Unread';
+}
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
   displayBooks();
@@ -26,8 +30,11 @@ function displayBooks() {
 
   myLibrary.forEach(book => {
     const row = tbody.insertRow(-1);
-    for (key in book) {
-      row.insertCell().textContent = book[key];
+
+    for (const key in book) {
+      if (Object.hasOwn(book, key)) {
+        row.insertCell().textContent = book[key];
+      }
     }
   });
 }
