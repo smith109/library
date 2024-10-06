@@ -2,11 +2,13 @@ const newBookBtn = document.querySelector('.new-book');
 const closeBtn = document.querySelector('.close-btn');
 const dialog = document.querySelector('dialog');
 const bookForm = document.querySelector('form');
+const tbody = document.querySelector('tbody');
 const myLibrary = [];
 
 newBookBtn.addEventListener('click', () => dialog.showModal());
 closeBtn.addEventListener('click', () => dialog.close());
 bookForm.addEventListener('submit', submitBookForm);
+tbody.addEventListener('click', handleActionButtons);
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -25,11 +27,10 @@ function addBookToLibrary(book) {
 }
 
 function displayBooks() {
-  const tbody = document.querySelector('tbody');
   tbody.replaceChildren();
-
-  myLibrary.forEach(book => {
+  myLibrary.forEach((book, index) => {
     const row = tbody.insertRow(-1);
+    row.dataset.id = index;
 
     for (const key in book) {
       if (Object.hasOwn(book, key)) {
@@ -49,7 +50,6 @@ function displayBooks() {
 
 function removeBookFromLibrary(index) {
   myLibrary.splice(index, 1);
-  displayBooks();
 }
 
 function submitBookForm(e) {
@@ -63,6 +63,25 @@ function submitBookForm(e) {
   e.preventDefault();
   bookForm.reset();
   dialog.close();
+}
+
+function handleActionButtons(e) {
+  const target = e.target;
+  const row = target.closest('[data-id]');
+  const index = row.dataset.id;
+
+  if (target.tagName !== 'BUTTON') return;
+
+  if (target.textContent === 'Delete') {
+    removeBookFromLibrary(index);
+  }
+
+  if (target.textContent === 'Mark as Read' ||
+    target.textContent === 'Mark as Unread') {
+    myLibrary[index].changeReadStatus();
+  }
+
+  displayBooks();
 }
 
 function updateButtonText(book) {
