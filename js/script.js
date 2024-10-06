@@ -32,6 +32,11 @@ function displayBooks() {
   });
 }
 
+function removeBookFromLibrary(index) {
+  myLibrary.splice(index, 1);
+  displayBooks();
+}
+
 function submitBookForm(e) {
   const title = document.querySelector('#book_title').value;
   const author = document.querySelector('#book_author').value;
