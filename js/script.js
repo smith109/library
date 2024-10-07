@@ -87,3 +87,13 @@ function handleActionButtons(e) {
 function updateButtonText(book) {
   return book.read === 'Unread' ? 'Mark as Read' : 'Mark as Unread';
 }
+
+// Sample Books
+let book1 = new Book('The Great Gatsby', 'F. Scott Fitzgerald', '208', 'Read');
+let book2 = new Book('To Kill a Mockingbird', 'Harper Lee', '336', 'Unread');
+let book3 = new Book('The Shining', 'Stephen King', '688', 'Unread');
+let book4 = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'Read');
+addBookToLibrary(book1);
+addBookToLibrary(book2);
+addBookToLibrary(book3);
+addBookToLibrary(book4);
