@@ -1,4 +1,7 @@
 :root {
+  --clr-primary: #282828;
+  --clr-accent: #623ae6;
+  --clr-neutral-lt: #faf9f9;
   --ff-base: Tahoma, Geneva, sans-serif;
 }
 
@@ -22,4 +25,40 @@ body {
 button {
   font: inherit;
   cursor: pointer;
+}
+
+body>.header {
+  background-color: var(--clr-primary);
+  color: var(--clr-neutral-lt);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+}
+
+.header>h1 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header>h1::before {
+  content: url(../img/book.svg);
+  width: 3rem;
+  height: 3rem;
+}
+
+.header>.new-book {
+  background: var(--clr-accent);
+  color: var(--clr-neutral-lt);
+  border: 2px solid transparent;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.header>.new-book:hover {
+  background: var(--clr-primary);
+  color: var(--clr-neutral-lt);
+  border: 2px solid var(--clr-accent);
 }
