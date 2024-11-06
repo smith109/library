@@ -10,15 +10,17 @@ closeBtn.addEventListener('click', () => dialog.close());
 bookForm.addEventListener('submit', submitBookForm);
 tbody.addEventListener('click', handleActionButtons);
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-Book.prototype.changeReadStatus = function () {
-  this.read = this.read === 'Unread' ? 'Read' : 'Unread';
+  changeReadStatus() {
+    this.read = this.read === 'Unread' ? 'Read' : 'Unread';
+  }
 }
 
 function addBookToLibrary(book) {
