@@ -1,4 +1,12 @@
+const newBookBtn = document.querySelector('.new-book-btn');
+const closeModalBtn = document.querySelector('.close-modal');
+const newBookForm = document.querySelector('.new-book-form');
+const newBookModal = document.querySelector('.new-book-modal');
 const myLibrary = [];
+
+newBookBtn.addEventListener('click', () => newBookModal.showModal());
+closeModalBtn.addEventListener('click', closeNewBookModal);
+newBookForm.addEventListener('submit', submitNewBookForm);
 
 function Book(title, author, pages, read) {
   if (!new.target) {
@@ -42,4 +50,21 @@ function displayBooks() {
 
     bookCards.appendChild(cardElement);
   });
+}
+
+function closeNewBookModal() {
+  newBookForm.reset();
+  newBookModal.close();
+}
+
+function submitNewBookForm() {
+  const inputs = newBookForm.elements;
+  const title = inputs['book-title'].value;
+  const author = inputs['book-author'].value;
+  const pages = inputs['page-count'].value;
+  const read = inputs['read-status'].checked;
+ 
+  addBookToLibrary(title, author, pages, read);
+  newBookForm.reset();
+  displayBooks();
 }
