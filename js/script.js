@@ -2,11 +2,13 @@ const newBookBtn = document.querySelector('.new-book-btn');
 const closeModalBtn = document.querySelector('.close-modal');
 const newBookForm = document.querySelector('.new-book-form');
 const newBookModal = document.querySelector('.new-book-modal');
+const bookCards = document.querySelector('.book-cards');
 const myLibrary = [];
 
 newBookBtn.addEventListener('click', () => newBookModal.showModal());
 closeModalBtn.addEventListener('click', closeNewBookModal);
 newBookForm.addEventListener('submit', submitNewBookForm);
+bookCards.addEventListener('click', handleBookActions);
 
 function Book(title, author, pages, read) {
   if (!new.target) {
@@ -34,18 +36,29 @@ function displayBooks() {
     const bookTitleElement = document.createElement('h2');
     const bookAuthorElement = document.createElement('p');
     const bookPagesElement = document.createElement('p');
-    const bookReadElement = document.createElement('p'); 
+    const bookReadElement = document.createElement('p');
+    const btnContainer = document.createElement('div'); 
+    const removeBtn = document.createElement('button');
+
+    cardElement.dataset.id = book.id;
+    cardElement.classList.add('card');
+    btnContainer.classList.add('btn-container');
+    removeBtn.classList.add('remove-btn');
 
     bookTitleElement.textContent = book.title;
     bookAuthorElement.textContent = `By: ${book.author}`;
     bookPagesElement.textContent = `${book.pages} pages`;
     bookReadElement.textContent = book.read ? 'Read' : 'Not read yet';
+    removeBtn.textContent = 'Remove';
+
+    btnContainer.append(removeBtn);
 
     cardElement.append(
       bookTitleElement, 
       bookAuthorElement, 
       bookPagesElement, 
-      bookReadElement
+      bookReadElement,
+      btnContainer,
     );
 
     bookCards.appendChild(cardElement);
@@ -67,4 +80,22 @@ function submitNewBookForm() {
   addBookToLibrary(title, author, pages, read);
   newBookForm.reset();
   displayBooks();
+}
+
+function handleBookActions(event) {
+  if (event.target.tagName != 'BUTTON') return;
+
+  const target = event.target;
+  const closestCard = target.closest('.card');
+  const bookId = closestCard.dataset.id;
+
+  if (target.className === 'remove-btn') {
+    removeBookFromLibrary(bookId);
+    displayBooks();
+  }
+}
+
+function removeBookFromLibrary(bookId) {
+  const index = myLibrary.findIndex((book) => book.id === bookId);
+  myLibrary.splice(index, 1);
 }
