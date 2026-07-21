@@ -22,6 +22,10 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleRead = function() {
+  this.read = !this.read;
+};
+
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
@@ -38,20 +42,23 @@ function displayBooks() {
     const bookPagesElement = document.createElement('p');
     const bookReadElement = document.createElement('p');
     const btnContainer = document.createElement('div'); 
+    const readBtn = document.createElement('button');
     const removeBtn = document.createElement('button');
 
     cardElement.dataset.id = book.id;
     cardElement.classList.add('card');
     btnContainer.classList.add('btn-container');
+    readBtn.classList.add('read-btn');
     removeBtn.classList.add('remove-btn');
 
     bookTitleElement.textContent = book.title;
     bookAuthorElement.textContent = `By: ${book.author}`;
     bookPagesElement.textContent = `${book.pages} pages`;
     bookReadElement.textContent = book.read ? 'Read' : 'Not read yet';
+    readBtn.textContent = 'Toggle Read';
     removeBtn.textContent = 'Remove';
 
-    btnContainer.append(removeBtn);
+    btnContainer.append(readBtn, removeBtn);
 
     cardElement.append(
       bookTitleElement, 
@@ -93,9 +100,25 @@ function handleBookActions(event) {
     removeBookFromLibrary(bookId);
     displayBooks();
   }
+
+  if (target.className === 'read-btn') {
+    updateReadStatus(bookId);
+    displayBooks();
+  }
 }
 
 function removeBookFromLibrary(bookId) {
   const index = myLibrary.findIndex((book) => book.id === bookId);
   myLibrary.splice(index, 1);
 }
+
+function updateReadStatus(bookId) {
+  const index = myLibrary.findIndex((book) => book.id === bookId);
+  myLibrary[index].toggleRead();
+}
+
+// Sample Books:
+addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, false);
+addBookToLibrary('Fahrenheit 451', 'Ray Bradbury', 156, true);
+addBookToLibrary('To Kill a Mockingbird', 'Harper Lee', 281, false);
+displayBooks();
