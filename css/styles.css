@@ -22,6 +22,14 @@
   margin: 0;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 body {
   line-height: 1.5;
   font-family: var(--system-ui-ff);
@@ -119,4 +127,119 @@ button {
 
 .btn-container > .remove-btn:hover {
   background-color: var(--color-dark-red);
+}
+
+dialog {
+  border-radius: 8px;
+  padding: calc(1rem + 2vw);
+}
+
+dialog > .modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0.6rem 1rem;
+}
+
+.modal-header > .close-modal {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--color-red);
+}
+
+.modal-header > .close-modal:hover {
+  border: 1px solid var(--color-dark-red);
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-group > label {
+  display: block;
+  font-weight: 600;
+  margin-top: 0.6rem;
+  font-size: 1.25rem;
+}
+
+.form-group > input[type='text'],
+.form-group > input[type='number'] {
+  border-radius: 5px;
+  padding: 0.25rem 0.6rem;
+  border: 2px solid #bbbbbb;
+}
+
+.form-group > input[type='text']:focus,
+.form-group > input[type='number']:focus {
+  border: 2px solid #5db5ef;
+}
+
+.form-group > input[type='text']:user-valid,
+.form-group > input[type='number']:user-valid {
+  border: 2px solid #5def5d;
+}
+
+.form-group > input[type='text']:user-invalid,
+.form-group > input[type='number']:user-invalid {
+  border: 2px solid var(--color-red);
+}
+
+.form-group.checkbox-container > label {
+  display: grid;
+  gap: 0.5em;
+  align-items: center;
+  grid-template-columns: 1em auto;
+}
+
+.form-group input[type='checkbox'] {
+  display: grid;
+  width: 1.15em;
+  height: 1.15em;
+  cursor: pointer;
+  appearance: none;
+  color: currentColor;
+  place-content: center;
+  border-radius: 0.15em;
+  border: 0.15em solid currentColor;
+}
+
+.form-group input[type='checkbox']::before {
+  content: '';
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--primary-btn-color);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0, 43% 62%);
+}
+
+.form-group input[type='checkbox']:checked::before {
+  transform: scale(1);
+}
+
+.form-group input[type='checkbox']:focus {
+  outline-offset: max(2px, 0.15em);
+  outline: max(2px, 0.15em) solid currentColor;
+}
+
+form .form-btn {
+  display: flex;
+  margin-top: 0.6rem;
+  justify-content: flex-end;
+}
+
+.form-btn button[type='submit'] {
+  padding: 8px 12px;
+  background-color: var(--primary-btn-color);
+}
+
+.form-btn button[type='submit']:hover {
+  background-color: var(--primary-btn-hover-clr);
 }
