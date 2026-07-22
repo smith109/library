@@ -1,6 +1,10 @@
 :root {
+  --color-white: #ffffff;
+  --header-bg-color: #2d3436;
   --primary-bg-color: #f4f4f4;
+  --primary-btn-color: #00b894;
   --primary-text-color: #111827;
+  --primary-btn-hover-clr: #019875;
   --system-ui-ff: system-ui, "Segoe UI", Roboto, Helvetica, Arial, 
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", 
     "Segoe UI Symbol";
@@ -26,4 +30,44 @@ body {
 input, 
 button {
   font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.container > .header {
+  display: flex;
+  align-items: center;
+  color: var(--color-white);
+  padding: calc(0.5rem + 1vw);
+  justify-content: space-between;
+  background-color: var(--header-bg-color);
+}
+
+.header h1 {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+}
+
+.header h1::before {
+  content: '';
+  width: 1.2em;
+  height: 1.2em;
+  background-image: url(../icons/library.svg);
+}
+
+.header .new-book-btn {
+  font-weight: 600;
+  padding: 10px 24px;
+  color: var(--color-white);
+  background-color: var(--primary-btn-color);
+}
+
+.header .new-book-btn:hover {
+  background-color: var(--primary-btn-hover-clr);
 }
