@@ -1,5 +1,7 @@
 :root {
+  --color-red: #d63031;
   --color-white: #ffffff;
+  --color-dark-red: #b71c1c;
   --header-bg-color: #2d3436;
   --primary-bg-color: #f4f4f4;
   --primary-btn-color: #00b894;
@@ -35,7 +37,19 @@ button {
 button {
   border: 0;
   cursor: pointer;
+  font-weight: 600;
   border-radius: 5px;
+  color: var(--color-white);
+}
+
+.btn-container .new-book-btn,
+.btn-container .read-btn {
+  background-color: var(--primary-btn-color);
+}
+
+.btn-container .new-book-btn:hover,
+.btn-container .read-btn:hover {
+  background-color: var(--primary-btn-hover-clr);
 }
 
 .container > .header {
@@ -62,12 +76,47 @@ button {
 }
 
 .header .new-book-btn {
-  font-weight: 600;
   padding: 10px 24px;
-  color: var(--color-white);
-  background-color: var(--primary-btn-color);
 }
 
-.header .new-book-btn:hover {
-  background-color: var(--primary-btn-hover-clr);
+.container > .main {
+  padding: calc(1rem + 0.5vw);
+}
+
+.main > .book-cards {
+  display: grid;
+  gap: calc(1rem + 1vw);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.book-cards > .card {
+  border-radius: 8px;
+  padding: calc(1rem + 1vw);
+  background-color: var(--color-white);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h2,
+.card p {
+  width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.card button {
+  padding: 4px 8px;
+  margin-right: 8px;
+}
+
+.card > .btn-container {
+  margin-top: 8px;
+}
+
+.btn-container > .remove-btn {
+  background-color: var(--color-red);
+}
+
+.btn-container > .remove-btn:hover {
+  background-color: var(--color-dark-red);
 }
